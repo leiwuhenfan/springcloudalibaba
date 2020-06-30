@@ -1,0 +1,45 @@
+有三种方式可以通过配置中心修改配置文件信息
+
+
+
+第一种A:通过 spring.cloud.nacos.config.shared-dataids 支持多个共享 Data Id 的配置
+其中 spring.cloud.nacos.config.shared-dataids 来支持多个共享 Data Id 的配置，多个之间用逗号隔开；
+
+	shared-dataids: ext-config01.properties,ext-config02.properties,ext-config03.properties
+	注：共享DataId的配置使用默认的group即 DEFAULT_GROUP，如果自定义了group将无法获取到配置，推荐使用扩展 Data Id 的配置 ，较为灵活。
+	
+
+第二种B:通过 spring.cloud.nacos.config.ext-config[n].data-id 的方式支持多个扩展 Data Id 的配置
+通过 spring.cloud.nacos.config.ext-config[n].data-id 的方式支持多个扩展 Data Id 的配置，多个 Data Id 同时配置时，他的优先级关系是 spring.cloud.nacos.config.ext-config[n].data-id 其中 n 的值越大，优先级越高。
+
+
+第三种C:通过内部相关规则(应用名、扩展名 )自动生成相关的 Data Id 配置
+file-extension: properties #application.name+file-extension=microservice-alibaba-nacos-config.properties
+
+当三种方式共同使用时，他们的一个优先级关系是:C > B >A，如图所示：
+
+
+//
+
+spring:
+   application:
+      name: microservice-alibaba-nacos-config #应用名称
+   profiles:
+      active: dev #模式
+   cloud:
+      nacos:
+         discovery:
+            server-addr: 127.0.0.1:8848
+            namespace: 9afdb97f-778e-41b3-a65d-b3f2b5b80403
+         config:
+            server-addr: 127.0.0.1:8848
+            namespace: 9afdb97f-778e-41b3-a65d-b3f2b5b80403
+            group: DEV_GROUP #测试组
+            file-extension: properties #nacos配资使用properties作为扩展名  dataid=spring.application.name+file-extension=microservice-alibaba-nacos-config.properties
+            shared-dataids: common.properties
+            refreshable-dataids: common.properties
+
+1.先找 microservice-alibaba-nacos-config-dev.properties,如果找到了则返回，如果找不到则进行下一步。
+
+2.查找 microservice-alibaba-nacos-config.yml 如果找不到，则查找共享的配置，根据上面的配置他会查找common.properties
+
