@@ -12,6 +12,8 @@ public class InitController {
 	/**
 	 * http://localhost:9090/hello
 	 * 
+	 * test
+	 * 
 	 * @return
 	 */
 	@GetMapping("/hello")

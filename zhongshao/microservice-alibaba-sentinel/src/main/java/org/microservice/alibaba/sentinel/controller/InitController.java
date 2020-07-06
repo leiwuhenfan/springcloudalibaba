@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * @author Wangfan
+ * @author Wangfan 
  */
 @RestController
 public class InitController {
