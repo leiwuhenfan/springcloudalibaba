@@ -23,31 +23,20 @@ spring:
     #账号配置
     ##"jdbc:mysql://localhost:3306/ceshi?autoReconnect=true&useUnicode=true&createDatabaseIfNotExist=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC"
     url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    # 用户名 :root
     username: ENC(2RlCNEBxi+G3jzVvQ01HnQ==)
+    # 密码: root
     password: ENC(eIQtVixBMIq+tdNy8+sRhA==)
      #驱动8以后的驱动名称 com.mysql.cj.jdbc.Driver
      #com.mysql.jdbc.Driver
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     
-    dbcp2:
-      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-      timeBetweenEvictionRunsMillis: 60000
-      #配置一个连接在池中最小生存的时间，单位是毫秒
-      minEvictableIdleTimeMillis: 300000
-      #验证连接是否有效。此参数必须设置为非空字符串，下面三项设置成true才能生效
-      validationQuery: SELECT 1
-      #指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除.
-      testWhileIdle: true
-      #指明是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个
-      test-on-borrow: true
-      #指明是否在归还到池中前进行检验
-      testOnReturn: false
-      
     hikari:
       pool-name: HikariCP-pool-wf
-      # 指定连接多久没被使用时，被设置为空闲，默认为10ms
-      idle-timeout: 100
+      # 指定连接多久没被使用时，被设置为空闲，默认为10000ms
+      # idleTimeout is less than 10000ms, setting to default 600000ms.
+      idle-timeout: 11000
       # 指定连接维护的最小空闲连接数，当使用HikariCP时指定.
       minimum-idle: 50
       # 指定连接池最大的连接数，包括使用中的和空闲的连接.
