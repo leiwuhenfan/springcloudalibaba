@@ -1,14 +1,3 @@
-# server
-server:
-   port: 9090
-
-
-#加密
-jasypt:
-  encryptor:
-    password: EWRREWRERWECCCXC
-    algorithm: PBEWithMD5AndDES
-
 spring:
   application:
       name: microservice-alibaba-nacos-discovery
@@ -22,9 +11,9 @@ spring:
   datasource:
     #账号配置
     ##"jdbc:mysql://localhost:3306/ceshi?autoReconnect=true&useUnicode=true&createDatabaseIfNotExist=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC"
-    url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
-    username: ENC(2RlCNEBxi+G3jzVvQ01HnQ==)
-    password: ENC(eIQtVixBMIq+tdNy8+sRhA==)
+    url: jdbc:mysql://127.0.0.1:3306/mysql?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root
      #驱动8以后的驱动名称 com.mysql.cj.jdbc.Driver
      #com.mysql.jdbc.Driver
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -63,7 +52,9 @@ spring:
 
    
 
-
+# server
+server:
+   port: 9090
    
 
    
