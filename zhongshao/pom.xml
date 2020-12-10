@@ -51,6 +51,7 @@
     <module>microservice-alibaba-nacos-discovery</module>
     <module>microservice-alibaba-nacos-config</module>
     <module>microservice-alibaba-sentinel</module>
+    <module>microservice-alibaba-geteway</module>
   </modules>
   
   
