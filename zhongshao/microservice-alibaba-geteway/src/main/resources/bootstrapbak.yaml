@@ -1,0 +1,59 @@
+#规划GateWay的服务端口
+server:
+  port: 9093
+##规划gateWay注册到到nacos上的服务应用名称
+spring:
+  application:
+    name: api-gateway
+  profiles:
+    active: dev  # 具体的gateway配置
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        #gateway工程注册到nacos上的地址
+        server-addr: 127.0.0.1:8848
+        namespace: 9afdb97f-778e-41b3-a65d-b3f2b5b80403
+    gateway:
+      routes:
+      - id: microservice-alibaba-nacos-config #id必须要唯一
+        uri: lb://microservice-alibaba-nacos-config # 代表从注册中心获取服务，且以lb（负载均衡）的方式转发
+        predicates:             #断言
+        - Path=/nacos-config/**     #表示将以/nacos-config/**开头的请求转发到uri为lb://microservice-alibaba-nacos-config的地址上
+        filters:
+        - StripPrefix=1 #1为去掉path的/nacos-config
+      - id: microservice-alibaba-nacos-discovery #id必须要唯一
+        uri: lb://microservice-alibaba-nacos-discovery # 微服务工程
+        predicates:             #断言
+        - Path=/nacos-discovery/**     #表示将以/nacos-discovery/**开头的请求转发到uri为lb://microservice-alibaba-nacos-discovery的地址上
+        filters:
+        - StripPrefix=1 #1为去掉path的/nacos-discovery
+      - id: microservice-alibaba-sentinel #id必须要唯一
+        uri: lb://microservice-alibaba-sentinel # 任意一个微服务工程
+        predicates:             #断言
+        - Path=/sentinel/**     #表示将以/sentinel/**开头的请求转发到uri为lb://microservice-alibaba-sentinel的地址上
+        filters:
+        - StripPrefix=1 #1为去掉path的/sentinel
+      discovery:
+        locator:
+          #表示将请求路径的服务名配置改成小写  因为服务注册的时候，向注册中心注册时将服务名转成大写的了
+          lowerCaseServiceId: true
+          #表示gateway开启服务注册和发现功能,
+          #并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router，这个router将以服务名开头的请求路径转发到对应的服务
+          enabled: true
+      httpclient:
+        response-timeout: 5000
+        connect-timeout: 5000
+#开启acutor端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      #打开端点详情
+      show-details: always
+
+
