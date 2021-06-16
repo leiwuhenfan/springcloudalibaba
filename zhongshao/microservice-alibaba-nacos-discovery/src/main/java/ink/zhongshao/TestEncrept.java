@@ -14,10 +14,10 @@ public class TestEncrept {
 	 public static void main(String[] arg){
 		 
 	        StandardPBEStringEncryptor standardPBEStringEncryptor =new StandardPBEStringEncryptor();
-	        /*配置文件中配置如下的算法*/
+	        /*配置文件中配置如下的算法:PBEWithMD5AndDES*/
 	        standardPBEStringEncryptor.setAlgorithm("PBEWithMD5AndDES");
-	        /*配置文件中配置的password*/
-	        standardPBEStringEncryptor.setPassword("EWRREWRERWECCCXC");
+	        /*配置文件中配置的password:EWRREWRERWECCCXC*/
+	        standardPBEStringEncryptor.setPassword("EWRREWRERWECCCXXXX");
 	        /*要加密的文本*/
 	        String name = standardPBEStringEncryptor.encrypt("root");
 	        String password =standardPBEStringEncryptor.encrypt("root");

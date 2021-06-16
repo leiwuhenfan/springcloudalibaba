@@ -30,17 +30,16 @@ public class Application {
 	 * 全局过滤器
 	 * @return
 	 */
-	//@Bean
-	public TokenFilter tokenFilter(){
-	    return new TokenFilter();
-	}
+	/*
+	 * @Bean public TokenFilter tokenFilter(){ return new TokenFilter(); }
+	 */
 	
 	/**
 	 * 设置 路由走指定的自定义过滤器
 	 * @param builder
 	 * @return
 	 */
-	@Bean
+	//@Bean
 	public RouteLocator customerRouteLocator(RouteLocatorBuilder builder) {
 	    // @formatter:off
 	    return builder.routes()

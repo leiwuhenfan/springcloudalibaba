@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 
 /**
- * 程序主入口
+ * 
  * 
  * @author Wangfan
  *

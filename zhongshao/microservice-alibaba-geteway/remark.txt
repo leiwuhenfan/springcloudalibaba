@@ -4,3 +4,10 @@ Route（路由）：这是网关的基本构建块。它由一个 ID，一个目
 Predicate（断言）：这是一个 Java 8 的 Predicate。输入类型是一个 ServerWebExchange。我们可以使用它来匹配来自 HTTP 请求的任何内容，例如 headers 或参数。
 
 Filter（过滤器）：这是org.springframework.cloud.gateway.filter.GatewayFilter的实例，我们可以使用它修改请求和响应。
+
+
+Spring Cloud Gateway有“pre”和“post”两种方式的filter。
+	客户端的请求先经过“pre”类型的filter，然后将请求转发到具体的业务服务，收到业务服务的响应之后，再经过“post”类型的filter处理，最后返回响应到客户端。
+	
+	实例filter工厂：AddRequestHeaderGatewayFilterFactory
+	             AddResponseHeaderGatewayFilterFactory
